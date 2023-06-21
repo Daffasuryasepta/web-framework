@@ -19,18 +19,8 @@ class Genre extends BaseController
 
     public function index()
     {
-        //step 5
-        $data['data_genre'] = $this->genre->getGenre();
-        return view("genre/index", $data);
-    }
-    public function all()
-    {
-        $data['semuagenre'] = $this->genre->getAllData();
+        $data['semuagenre'] = $this->genre->getGenre();
         return view("genre/semuagenre", $data);
-    }
-    public function genre()
-    {
-        dd($this->genre->getDataBy("Action"));
     }
 
 }

@@ -12,27 +12,9 @@ class GenreModel extends Model
     protected $allowFields = [];
 
 
-    public function getFilm()
+    public function getGenre()
     {
-        $data = [
-            [
-                "nama_genre" => "Horor",
-            ],
-            [
-
-                "nama_genre" => "action",
-
-                [
-                    "nama_genre" => "Sci-fi",
-                ],
-                [
-
-                    "nama_genre" => "Comedy",
-
-                ],
-            ]
-        ];
-        return $data;
+        return $this->findAll();
     }
     public function getAllData()
     {

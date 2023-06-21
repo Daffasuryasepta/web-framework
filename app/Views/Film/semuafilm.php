@@ -26,10 +26,10 @@
                         <a class="nav-link" href="/film">All Film</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Film Category</a>
+                        <a class="nav-link" href="/genre">Film Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">About Us</a>
+                        <a class="nav-link" href="/aboutus">About Us</a>
                     </li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
             <?php foreach ($semuafilm as $film): ?>
                 <div class="col-md-3">
                     <div class="card">
-                        <img src="/assets/cover/<?= $film["cover"] ?>" class="card-img-top">
+                        <img src="/assets/cover/<?= $film["cover"] ?>" height="280px" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <?= $film["nama_film"] ?>
