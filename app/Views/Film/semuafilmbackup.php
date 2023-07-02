@@ -9,51 +9,34 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary text-white">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">LK21</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/film">All Film</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/genre">Film Category</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">About Us</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="row">
-            <?php foreach ($semuafilm as $film): ?>
-                <tr>
-                    <td>
-                        <?php echo $i++; ?>
-                    </td>
-                    <td><img style="widht: 50px;" src="/assets/cover/<?= $film['cover'] ?>" alt=""></td>
-                    <td>
-                        <?php echo $film['nama_film'] ?>
-                    </td>
-                    <td>
-                        <?php echo $film['nama_genre'] ?>
-                    </td>
-                    <td>
-                        <?php echo $film['duration'] ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </table>
+    <h1>Data Film</h1>
+    <table border="1" cellspaccing="0" cellpadding="5">
+        <tr>
+            <th>No</th>
+            <th>Cover</th>
+            <th>Nama</th>
+            <th>Genre</th>
+            <th>Durasi</th>
+        </tr>
+        <?php $i = 1; ?>
+        <?php foreach ($semuafilm as $film): ?>
+            <tr>
+                <td>
+                    <?php echo $i++; ?>
+                </td>
+                <td><img style="widht: 50px;" src="/assets/cover/<?= $film['cover'] ?>" alt=""></td>
+                <td>
+                    <?php echo $film['nama_film'] ?>
+                </td>
+                <td>
+                    <?php echo $film['nama_genre'] ?>
+                </td>
+                <td>
+                    <?php echo $film['duration'] ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 
 </html>

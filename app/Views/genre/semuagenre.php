@@ -47,11 +47,10 @@
                             </p>
                             <a href="#" class="btn btn-success">Update</a>
                             <a href="#" class="btn btn-warning">Delete</a>
-
                         </div>
-                    <?php endforeach; ?>
-            </div>
 
+                </div>
+            <?php endforeach; ?>
         </div>
 
     </div>

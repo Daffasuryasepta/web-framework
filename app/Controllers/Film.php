@@ -74,7 +74,7 @@ class Film extends BaseController
             ]
         ]);
         if (!$validation) {
-            $errors = \Config\Services::validation()->getError();
+            $errors = \Config\Services::validation()->getErrors();
 
             return redirect()->back()->withInput()->with('errors', $errors);
         }

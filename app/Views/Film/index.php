@@ -74,8 +74,6 @@
                                     <?= $film["duration"] ?>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-success">Update</a>
-                                <td>
                                     <a href="/film/update/<?= $film["id"]; ?>" class="btn btn-success">Update</a>
                                     <a href="" class="btn btn-danger">Delete</a>
                                 </td>
