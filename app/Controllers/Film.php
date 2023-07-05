@@ -99,8 +99,84 @@ class Film extends BaseController
     {
         $data["genre"] = $this->genre->getAllData();
         $data["errors"] = session('errors');
-        $data["semuafilm"] = $this->film->getDataByID($id);
-        return view("film/update", $data);
+        $data["film"] = $this->film->getDataByID($id);
+        return view("film/edit", $data);
+    }
+
+    public function edit()
+    {
+        $validation = $this->validate([
+            'nama_film' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom Nama Film harus diisi'
+                ]
+            ],
+            'id_genre' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom Genre harus diisi'
+                ]
+            ],
+            'duration' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom durasi harus diisi'
+                ]
+            ],
+            'cover' => [
+                'rules' => 'mime_in[cover,image/jpg,image/jpg,image/jpeg,image/png]|max_size[cover,2048]',
+                'errors' => [
+                    'mine_in' => 'Tipe file pada Kolom Cover harus berupa JPG, JPEG, atau PNG',
+                    'mine_size' => 'Ukuran file pada Kolom Cover melibihi batas maksimum'
+                ]
+            ]
+        ]);
+
+        if (!$validation) {
+            $errors = \Config\Services::validation()->getErrors();
+
+            return redirect()->back()->withInput()->with('errors', $errors);
+        }
+        //ambil data lama
+        $film = $this->film->find($this->request->getPost('id'));
+        // tambah request id
+        $data = [
+            'id' => $this->request->getPost('id'),
+            'nama_film' => $this->request->getPost('nama_film'),
+            'id_genre' => $this->request->getPost('id_genre'),
+            'durtion' => $this->request->getPost('duration'),
+
+        ];
+        // cek apa ada cover yang diapload
+        $cover = $this->request->getFile('cover');
+        if ($cover->isValid() && !$cover->hasMoved()) {
+            //generate file yang unik
+            $imageName = $cover->getRandomName();
+            //pindah file ke direktori penyimpanan
+            $cover->move(ROOTPATH . 'public/assets/cover/' . $imageName);
+            //Hapus file gambar lama
+            if ($film['cover']) {
+                unlink(ROOTPATH . 'public/assets/cover' . $film['cover']);
+            }
+            //jika ada tambahkan array cover pada variabel $data
+            $data['cover'] = $imageName;
+
+
+        }
+        $this->film->save($data);
+        //ubah pesan
+        session()->setFlashdata('success', 'Data berhasil diperbarui.');
+        return redirect()->to('/film');
+
+
+    }
+
+    public function destroy($id)
+    {
+        $this->film->delete($id);
+        session()->setFlashdata('success', 'Data berhasil dihapus.');
+        return redirect()->to('/film');
     }
 
     public function genre1()
